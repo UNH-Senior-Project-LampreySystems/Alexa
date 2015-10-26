@@ -1,0 +1,12 @@
+{
+  "intents": [
+    {
+      "intent": "ChuckNorrisIntent",
+      "slots": []
+    },
+    {
+      "intent": "HelpIntent",
+      "slots": []
+    }
+  ]
+}
