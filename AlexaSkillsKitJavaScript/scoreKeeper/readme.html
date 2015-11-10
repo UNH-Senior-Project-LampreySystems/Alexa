@@ -1,0 +1,51 @@
+<h1>Sample AWS Lambda function for Alexa</h1>
+
+<p>A simple <a href="http://aws.amazon.com/lambda">AWS Lambda</a> function that demonstrates how to write a skill for the Amazon Echo using the Alexa SDK.</p>
+
+<h2>Concepts</h2>
+
+<p>This sample shows how to create a Lambda function for handling Alexa Skill requests that:</p>
+
+<ul><li>Multiple slots: has 2 slots (name and score)</li><li>Database Interaction: demonstrates how to read and write data to DynamoDB.</li><li>NUMBER slot: demonstrates how to handle number slots.</li><li>LITERAL slot: demonstrates literal handling for a finite set of known values</li><li>Dialog and Session state: Handles two models, both a one-shot ask and tell model, and a multi-turn dialog model.
+If the user provides an incorrect slot in a one-shot model, it will direct to the dialog model. See the
+examples section for sample interactions of these models.</li></ul>
+
+<h2>Setup</h2>
+
+<p>To run this example skill you need to do two things. The first is to deploy the example code in lambda, and the second is to configure the Alexa skill to use Lambda.</p>
+
+<h3>AWS Lambda Setup</h3>
+
+<ol><li>Go to the AWS Console and click on the Lambda link. Note: ensure you are in us-east or you won&#39;t be able to use Alexa with Lambda.</li><li>Click on the Create a Lambda Function or Get Started Now button.</li><li>Skip the blueprint</li><li>Name the Lambda Function &quot;Score-Keeper-Example-Skill&quot;.</li><li>Select the runtime as Node.js</li><li>Go to the the src directory, select all files and then create a zip file, make sure the zip file does not contain the src directory itself, otherwise Lambda function will not work.</li><li>Select Code entry type as &quot;Upload a .ZIP file&quot; and then upload the .zip file to the Lambda</li><li>Keep the Handler as index.handler (this refers to the main js file in the zip).</li><li>Create a Basic with DynamoDB role and click create.</li><li>Leave the Advanced settings as the defaults.</li><li>Click &quot;Next&quot; and review the settings then click &quot;Create Function&quot;</li><li>Click the &quot;Event Sources&quot; tab and select &quot;Add event source&quot;</li><li>Set the Event Source type as Alexa Skills kit and Enable it now. Click Submit.</li><li>Copy the ARN from the top right to be used later in the Alexa Skill Setup.</li></ol>
+
+<h3>AWS DynamoDB Setup</h3>
+
+<ol><li>Go to the AWS Console and click on <a href="https://console.aws.amazon.com/dynamodb">DynamoDB link</a>. Note: ensure you are in us-east (same as your Lambda)</li><li>Click on CreateTable: set &quot;ScoreKeeperUserData&quot; as the table name, use Hash for the primary key type and set &quot;CustomerId&quot; as the hash attribute name.</li><li>Continue the steps with the default settings to finish the setup of DynamoDB table.</li></ol>
+
+<h3>Alexa Skill Setup</h3>
+
+<ol><li>Go to the <a href="https://developer.amazon.com/edw/home.html">Alexa Console</a> and click Add a New Skill.</li><li>Set &quot;ScoreKeeper&quot; for the skill name and &quot;score keeper&quot; as the invocation name, this is what is used to activate your skill. For example you would say: &quot;Alexa, Ask score keeper for the current score.&quot;</li><li>Select the Lambda ARN for the skill Endpoint and paste the ARN copied from above. Click Next.</li><li>Copy the custom slot types from the customSlotTypes folder. Each file in the folder represents a new custom slot type. The name of the file is the name of the custom slot type, and the values in the file are the values for the custom slot.</li><li>Copy the Intent Schema from the included IntentSchema.json.</li><li>Copy the Sample Utterances from the included SampleUtterances.txt. Click Next.</li><li>[optional] go back to the skill Information tab and copy the appId. Paste the appId into the scoreKeeper.js file for the variable APP_ID,
+then update the lambda source zip file with this change and upload to lambda again, this step makes sure the lambda function only serves request from authorized source.</li><li>You are now able to start testing your sample skill! You should be able to go to the <a href="http://echo.amazon.com/#skills">Echo webpage</a> and see your skill enabled.</li><li>In order to test it, try to say some of the Sample Utterances from the Examples section below.</li><li>Your skill is now saved and once you are finished testing you can continue to publish your skill.</li></ol>
+
+<h2>Examples</h2>
+
+<h3>Dialog model:</h3>
+
+<pre><code>User: &quot;Alexa, tell score keeper to reset.&quot;
+Alexa: &quot;New game started without players. Who do you want to add first?&quot;
+User: &quot;Add the player Bob&quot;
+Alexa: &quot;Bob has joined your game&quot;
+User: &quot;Add player Jeff&quot;
+Alexa: &quot;Jeff has joined your game&quot;
+
+(skill saves the new game and ends)
+
+User: &quot;Alexa, tell score keeper to give Bob three points.&quot;
+Alexa: &quot;Updating your score, three points for Bob&quot;
+
+(skill saves the latest score and ends)</code></pre>
+
+<h3>One-shot model:</h3>
+
+<pre><code>User: &quot;Alexa, ask score keeper what&#39;s the current score?&quot;
+Alexa: &quot;Jeff has zero points and Bob has three&quot;</code></pre>

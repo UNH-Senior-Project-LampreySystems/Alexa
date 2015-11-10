@@ -1,0 +1,30 @@
+GenericIntent how has my {MeasurementType} been
+GenericIntent what is my {MeasurementType}
+GenericIntent {MeasurementType}
+GenericIntent i want to know about my {MeasurementType}
+GenericIntent tell me about my {MeasurementType}
+
+HighLowAvgIntent how {HighLowAvg} has my {MeasurementType} been
+HighLowAvgIntent tell me the {HighLowAvg} my {MeasurementType} has been
+
+TrendIntent has my {MeasurementType} been {TrendType}
+TrendIntent have my {MeasurementType} been {TrendType}
+TrendIntent my {MeasurementType} has been {TrendType}
+TrendIntent if my {MeasurementType} has been {TrendType}
+
+HelpIntent help
+HelpIntent help me
+HelpIntent what can I ask you
+HelpIntent get help
+HelpIntent to help
+HelpIntent to help me
+HelpIntent what commands can I ask
+HelpIntent what commands can I say
+HelpIntent what can I do
+HelpIntent what can I use this for
+HelpIntent what questions can I ask
+HelpIntent what can you do
+HelpIntent what do you do
+HelpIntent how do I use you
+HelpIntent how can I use you
+HelpIntent what can you tell me

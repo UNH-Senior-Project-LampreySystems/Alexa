@@ -1,0 +1,43 @@
+{
+  "intents": [
+    {
+      "intent": "GenericIntent",
+      "slots": [
+          {
+              "name": "MeasurementType",
+              "type": "LIST_OF_MEASUREMENT_TYPES"
+          }
+      ]
+    },
+    {
+      "intent": "HighLowAvgIntent",
+      "slots": [
+          {
+              "name": "MeasurementType",
+              "type": "LIST_OF_MEASUREMENT_TYPES"
+          },
+          {
+              "name": "HighLowAvg",
+              "type": "LIST_OF_HIGH_LOW_AVG"
+          }
+      ]
+    },
+    {
+      "intent": "TrendIntent",
+      "slots": [
+          {
+              "name": "MeasurementType",
+              "type": "LIST_OF_MEASUREMENT_TYPES"
+          },
+          {
+              "name": "TrendType",
+              "type": "LIST_OF_TREND_TYPES"
+          }
+      ]
+    },
+    {
+      "intent": "HelpIntent",
+      "slots": []
+    }
+  ]
+}
