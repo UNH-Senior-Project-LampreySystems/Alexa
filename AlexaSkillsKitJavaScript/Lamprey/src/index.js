@@ -23,6 +23,8 @@
  */
 var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
 
+var TimeHelper = require('./TimeHelper');
+
 /**
  * The AlexaSkill prototype and helper functions
  */
@@ -53,19 +55,26 @@ Lamprey.prototype.intentHandlers = {
     
     // register custom intent handlers
     GenericIntent: function (intent, session, response) {
-		response.tell("Generic " + intent.slots.MeasurementType.value || " empty measurement type");
+        
+        var date = TimeHelper(intent.slots.Date.value);
+        
+		response.tell("Generic " + (intent.slots.MeasurementType.value || " empty measurement type ") + "date: " + date);
     },
     
     HighLowAvgIntent: function(intent, session, response){
-        response.tell("HighLow");
+        var date = TimeHelper(intent.slots.Date.value);
+        
+        response.tell("HighLow " + "date: " + date);
     },
     
     TrendIntent: function(intent, session, response){
-        response.tell("Trend");
+        var date = TimeHelper(intent.slots.Date.value);
+        
+        response.tell("Trend " + "date: " + date);
     },
     
     HelpIntent: function (intent, session, response) {
-        response.ask("This is the help for lamprey");
+        response.tell("This is the help for lamprey");
     }
 };
 

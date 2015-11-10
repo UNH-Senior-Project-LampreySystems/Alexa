@@ -4,13 +4,34 @@ GenericIntent {MeasurementType}
 GenericIntent i want to know about my {MeasurementType}
 GenericIntent tell me about my {MeasurementType}
 
+GenericIntent how has my {MeasurementType} been {Date}
+GenericIntent how has my {MeasurementType} been this {Date}
+GenericIntent what is my {MeasurementType} {Date}
+GenericIntent {MeasurementType}
+GenericIntent i want to know about my {MeasurementType} {Date}
+GenericIntent i want to know about my {MeasurementType} during {Date}
+GenericIntent i want to know about my {MeasurementType} for {Date}
+GenericIntent i want to know about my {MeasurementType} during the {Date}
+GenericIntent tell me about my {MeasurementType} {Date}
+
 HighLowAvgIntent how {HighLowAvg} has my {MeasurementType} been
 HighLowAvgIntent tell me the {HighLowAvg} my {MeasurementType} has been
+
+HighLowAvgIntent how {HighLowAvg} has my {MeasurementType} been {Date}
+HighLowAvgIntent how {HighLowAvg} has my {MeasurementType} been during {Date}
+HighLowAvgIntent tell me the {HighLowAvg} my {MeasurementType} has been {Date}
+HighLowAvgIntent tell me the {HighLowAvg} my {MeasurementType} has been for {Date}
 
 TrendIntent has my {MeasurementType} been {TrendType}
 TrendIntent have my {MeasurementType} been {TrendType}
 TrendIntent my {MeasurementType} has been {TrendType}
 TrendIntent if my {MeasurementType} has been {TrendType}
+
+TrendIntent has my {MeasurementType} been {TrendType} {Date}
+TrendIntent has my {MeasurementType} been {TrendType} during {Date}
+TrendIntent have my {MeasurementType} been {TrendType} {Date}
+TrendIntent my {MeasurementType} has been {TrendType} {Date}
+TrendIntent if my {MeasurementType} has been {TrendType} {Date}
 
 HelpIntent help
 HelpIntent help me

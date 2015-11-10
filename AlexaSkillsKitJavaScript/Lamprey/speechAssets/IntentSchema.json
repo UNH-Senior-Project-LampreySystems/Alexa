@@ -6,6 +6,10 @@
           {
               "name": "MeasurementType",
               "type": "LIST_OF_MEASUREMENT_TYPES"
+          },
+          {
+              "name": "Date",
+              "type": "AMAZON.DATE"
           }
       ]
     },
@@ -19,6 +23,10 @@
           {
               "name": "HighLowAvg",
               "type": "LIST_OF_HIGH_LOW_AVG"
+          },
+          {
+              "name": "Date",
+              "type": "AMAZON.DATE"
           }
       ]
     },
@@ -32,6 +40,10 @@
           {
               "name": "TrendType",
               "type": "LIST_OF_TREND_TYPES"
+          },
+          {
+              "name": "Date",
+              "type": "AMAZON.DATE"
           }
       ]
     },
