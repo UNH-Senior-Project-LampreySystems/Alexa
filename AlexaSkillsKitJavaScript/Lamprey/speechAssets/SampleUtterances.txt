@@ -1,4 +1,4 @@
-GenericIntent how has my {MeasurementType} been
+GenericIntent how my {MeasurementType} been
 GenericIntent what is my {MeasurementType}
 GenericIntent {MeasurementType}
 GenericIntent i want to know about my {MeasurementType}

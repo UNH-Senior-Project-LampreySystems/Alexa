@@ -8,8 +8,16 @@
               "type": "LIST_OF_MEASUREMENT_TYPES"
           },
           {
-              "name": "Date",
-              "type": "AMAZON.DATE"
+              "name": "TimeFrame",
+              "type": "LIST_OF_TIME_FRAME"
+          },
+          {
+              "name": "PreTime",
+              "type": "LIST_OF_PRE_TIME"
+          },
+          {
+              "name": "Multiple",
+              "type": "AMAZON.NUMBER"
           }
       ]
     },
@@ -25,8 +33,16 @@
               "type": "LIST_OF_HIGH_LOW_AVG"
           },
           {
-              "name": "Date",
-              "type": "AMAZON.DATE"
+              "name": "TimeFrame",
+              "type": "LIST_OF_TIME_FRAME"
+          },
+          {
+              "name": "PreTime",
+              "type": "LIST_OF_PRE_TIME"
+          },
+          {
+              "name": "Multiple",
+              "type": "AMAZON.NUMBER"
           }
       ]
     },
@@ -42,8 +58,16 @@
               "type": "LIST_OF_TREND_TYPES"
           },
           {
-              "name": "Date",
-              "type": "AMAZON.DATE"
+              "name": "TimeFrame",
+              "type": "LIST_OF_TIME_FRAME"
+          },
+          {
+              "name": "PreTime",
+              "type": "LIST_OF_PRE_TIME"
+          },
+          {
+              "name": "Multiple",
+              "type": "AMAZON.NUMBER"
           }
       ]
     },

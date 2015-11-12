@@ -23,7 +23,8 @@
  */
 var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
 
-var TimeHelper = require('./TimeHelper');
+var SlotHelper = require('./SlotHelper'),
+    DataMiddleman = require('./DataMiddleman');
 
 /**
  * The AlexaSkill prototype and helper functions
@@ -56,25 +57,41 @@ Lamprey.prototype.intentHandlers = {
     // register custom intent handlers
     GenericIntent: function (intent, session, response) {
         
-        var date = TimeHelper(intent.slots.Date.value);
+        var slots = SlotHelper(intent.slots);
         
-		response.tell("Generic " + (intent.slots.MeasurementType.value || " empty measurement type ") + "date: " + date);
+        DataMiddleman.generic(slots, function(results){
+        
+            var out = "In the past ";
+            
+            if (slots.Multiple > 1)
+                out += slots.Multiple + " " + slots.TimeFrame + "s, ";
+            else
+                out += slots.TimeFrame + ", ";
+            
+            out += "you had " + results.numMeasurements + " " + slots.MeasurementType + " measurements. ";
+            out += "Your average " + slots.MeasurementType + " was " + results.average + ". ";
+            out += "Your highest " + slots.MeasurementType + " was " + results.high + ". ";
+            out += "Your lowest " + slots.MeasurementType + " was " + results.low + ". ";
+            
+            response.tell(out);
+            
+        });
+
     },
     
     HighLowAvgIntent: function(intent, session, response){
-        var date = TimeHelper(intent.slots.Date.value);
         
         response.tell("HighLow " + "date: " + date);
     },
     
     TrendIntent: function(intent, session, response){
-        var date = TimeHelper(intent.slots.Date.value);
         
         response.tell("Trend " + "date: " + date);
     },
     
     HelpIntent: function (intent, session, response) {
-        response.tell("This is the help for lamprey");
+        
+        response.tell("Added item to database");
     }
 };
 
