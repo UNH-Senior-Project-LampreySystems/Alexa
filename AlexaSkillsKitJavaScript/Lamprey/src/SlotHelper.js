@@ -16,7 +16,9 @@ function SlotHelper(slots){
                 else
                     return slots.TimeFrame.value;
             }
-        })()
+        })(),
+        
+        HighLowAvg: slots.HighLowAvg ? slots.HighLowAvg.value : undefined
     };
     
 }

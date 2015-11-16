@@ -24,7 +24,8 @@
 var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
 
 var SlotHelper = require('./SlotHelper'),
-    DataMiddleman = require('./DataMiddleman');
+    DataMiddleman = require('./DataMiddleman'),
+    TextBuilder = require('./TextBuilder');
 
 /**
  * The AlexaSkill prototype and helper functions
@@ -58,21 +59,12 @@ Lamprey.prototype.intentHandlers = {
     GenericIntent: function (intent, session, response) {
         
         var slots = SlotHelper(intent.slots);
+        var query = [ "average", "high" , "low" ];
         
-        DataMiddleman.generic(slots, function(results){
+        DataMiddleman( query , slots , function( results ){
         
-            var out = "In the past ";
-            
-            if (slots.Multiple > 1)
-                out += slots.Multiple + " " + slots.TimeFrame + "s, ";
-            else
-                out += slots.TimeFrame + ", ";
-            
-            out += "you had " + results.numMeasurements + " " + slots.MeasurementType + " measurements. ";
-            out += "Your average " + slots.MeasurementType + " was " + results.average + ". ";
-            out += "Your highest " + slots.MeasurementType + " was " + results.high + ". ";
-            out += "Your lowest " + slots.MeasurementType + " was " + results.low + ". ";
-            
+            var out = TextBuilder(query, slots, results);
+            //var out = "hi";
             response.tell(out);
             
         });
@@ -81,7 +73,16 @@ Lamprey.prototype.intentHandlers = {
     
     HighLowAvgIntent: function(intent, session, response){
         
-        response.tell("HighLow " + "date: " + date);
+        var slots = SlotHelper(intent.slots);
+        var query = [slots.HighLowAvg];
+        
+        DataMiddleman( query, slots, function(results){
+            
+            var out = TextBuilder(query, slots, results);
+        
+            response.tell(out);
+            
+        });
     },
     
     TrendIntent: function(intent, session, response){
@@ -91,7 +92,7 @@ Lamprey.prototype.intentHandlers = {
     
     HelpIntent: function (intent, session, response) {
         
-        response.tell("Added item to database");
+        response.tell("Help intnet");
     }
 };
 

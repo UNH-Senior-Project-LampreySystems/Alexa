@@ -1,3 +1,5 @@
+module.exports = queryData;
+
 var getData = require('./GetData');
 
 //time variables
@@ -10,7 +12,6 @@ var tm = {};
     tm.month = 4 * tm.week;
     tm.year = 12 * tm.month;
 
-//private functions
 function queryData(query, slots, cb){
     
     getData(function(data){
@@ -76,14 +77,6 @@ function queryData(query, slots, cb){
         cb(results);
         
     });
-    
-}
-
-exports.generic = function(slots, cb){
-    
-    query = ["high", "low", "average"];
-    
-    queryData(query, slots, cb);
     
 };
         
