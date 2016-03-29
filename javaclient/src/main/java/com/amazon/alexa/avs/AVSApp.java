@@ -34,8 +34,11 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
     }
 
     public AVSApp() {
+
         mController = new AVSController(this);
         new AVSSetup(this);
+
+
 
         addTokenField();
         addVisualizerField();
@@ -46,6 +49,8 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(400, 200);
         setVisible(true);
+
+        new WakeUpListener();
     }
 
     private void addTokenField() {

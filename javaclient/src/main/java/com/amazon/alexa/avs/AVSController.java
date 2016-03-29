@@ -33,6 +33,7 @@ public class AVSController implements RecordingStateListener {
         mAVSClient = new AVSClient();
         mPlayer = new AVSAudioPlayer(this);
         mNavigationToken = "";
+
         // ensure we notify AVS of playbackInterrupted on app exit
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
@@ -40,6 +41,10 @@ public class AVSController implements RecordingStateListener {
                 mPlayer.stop();
             }
         });
+
+
+
+
     }
 
     public void setBearerToken(String token) {

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: edu.cmu.sphinx:sphinx4-data:5prealpha-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/edu/cmu/sphinx/sphinx4-data/5prealpha-SNAPSHOT/sphinx4-data-5prealpha-20160218.203535-7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/edu/cmu/sphinx/sphinx4-data/5prealpha-SNAPSHOT/sphinx4-data-5prealpha-20160218.203535-7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/edu/cmu/sphinx/sphinx4-data/5prealpha-SNAPSHOT/sphinx4-data-5prealpha-20160218.203535-7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
