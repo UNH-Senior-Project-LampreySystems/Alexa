@@ -2,17 +2,13 @@
 
 package com.amazon.alexa.avs;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.Mixer;
-import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.*;
 
 public class AudioCapture {
     private static AudioCapture sAudioCapture;
@@ -39,6 +35,7 @@ public class AudioCapture {
             final RecordingStateListener stateListener, final RecordingRMSListener rmsListener)
             throws LineUnavailableException, IOException {
         try {
+
             mCapturing = true; // set in-capturing to true
 
             mInput.open(audioFormat);
@@ -75,6 +72,26 @@ public class AudioCapture {
             stopCapture(); // make sure to unset capturing mode if there was an exception
             throw e;
         }
+    }
+
+    public AudioInputStream sphinxCapture (final AudioFormat audioFormat)
+            throws LineUnavailableException, IOException {
+
+        try {
+            mCapturing = true; // set in-capturing to true
+
+            mInput.open(audioFormat);
+            mInput.start();
+
+            return new AudioInputStream(mInput);
+
+        } catch( Exception e){
+            stopCapture();
+            throw e;
+        }
+
+
+
     }
 
     // rmsListener is the AudioRMSListener callback for audio visualizer(optional - can be null)

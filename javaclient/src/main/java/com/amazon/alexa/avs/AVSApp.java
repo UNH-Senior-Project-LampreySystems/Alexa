@@ -21,8 +21,10 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
     private static final String STOP_LABEL = "Stop Listening";
     private static final String PROCESSING_LABEL = "Processing";
     private final AVSController mController;
+    private CMUWakeup mWakeUp;
     private JButton mAction;
     private JTextField mToken;
+    private String mToken_string;
     private JProgressBar mVisualizer;
     private Thread mAutoEndpoint = null; // used to auto-endpoint while listening
     // minimum audio level threshold under which is considered silence
@@ -35,11 +37,13 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
 
     public AVSApp() {
 
+        //System.out.println("The value of close microphone: " + Microphone.PROP_CLOSE_BETWEEN_UTTERANCES);
+
         mController = new AVSController(this);
         new AVSSetup(this);
 
 
-
+        mWakeUp = new CMUWakeup(this);
         addTokenField();
         addVisualizerField();
         addActionField();
@@ -50,8 +54,34 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
         setSize(400, 200);
         setVisible(true);
 
-        new WakeUpListener();
+
     }
+
+    public void wakeUpStart() {
+        mAction.doClick();
+        /*mController.setBearerToken(mToken_string);
+        final RecordingRMSListener rmsListener = this;
+
+        SwingWorker<Void, Void> alexaCall = new SwingWorker<Void, Void>() {
+            @Override
+            public Void doInBackground() throws Exception {
+                mController.startRecording(rmsListener);
+                return null;
+            }
+
+            @Override
+            public void done() {
+                try {
+                    get(); // get any exceptions that were thrown
+                } catch (Exception e) {
+                    mController.stopRecording();
+                    e.printStackTrace();
+                }
+            }
+        };
+        alexaCall.execute();*/
+    }
+
 
     private void addTokenField() {
         getContentPane().add(new JLabel("Bearer Token:"));
@@ -73,7 +103,7 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
             public void actionPerformed(ActionEvent e) {
                 if (mAction.getText().equals(START_LABEL)) { // if in idle mode
                     mAction.setText(STOP_LABEL);
-                    mController.setBearerToken(mToken.getText());
+                    mController.setBearerToken(mToken_string);
 
                     SwingWorker<Void, Void> alexaCall = new SwingWorker<Void, Void>() {
                         @Override
@@ -109,9 +139,12 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
     }
 
     public void finishProcessing() { // update ui after stop recording completes
+
         mAction.setText(START_LABEL);
         mAction.setEnabled(true);
         mVisualizer.setIndeterminate(false);
+        System.out.println("Listening for wakeup again");
+        mWakeUp.listenForWakeup();
     }
 
     @Override
@@ -130,7 +163,7 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
                     public void run() {
                         try {
                             Thread.sleep(ENDPOINT_SECONDS * 1000);
-                            mAction.doClick(); // hit stop if we get through the autoendpoint time
+                            mController.stopRecording(); // hit stop if we get through the autoendpoint time
                         } catch (InterruptedException e) {
                             return;
                         }
@@ -163,7 +196,8 @@ public class AVSApp extends JFrame implements AVSListenHandler, RecordingRMSList
     }
 
     public void setToken(String token) {
-        mToken.setText(token);
+        mToken_string = token;
+        mWakeUp.listenForWakeup();
     }
 
 }
