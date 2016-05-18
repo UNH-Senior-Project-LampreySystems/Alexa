@@ -92,7 +92,7 @@ Lamprey.prototype.intentHandlers = {
     
     HelpIntent: function (intent, session, response) {
         
-        response.tell("Help intnet");
+        response.tell("You can ask lamprey about your medical measurements, such as your weight or heart rate. You can also ask for the highest or lowest measurement, and you can always specify a time such as week, two weeks, or two months.");
     }
 };
 

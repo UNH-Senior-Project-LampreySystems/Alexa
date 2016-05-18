@@ -55,7 +55,7 @@ function queryData(query, slots, cb){
                 if (typeof results.low === 'undefined')
                     results.low = dataPoint.value;
                 else {
-                    if ( dataPoint.value < results.high )
+                    if ( dataPoint.value < results.low )
                         results.low = dataPoint.value;
                 }
             }

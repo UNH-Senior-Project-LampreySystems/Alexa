@@ -29,7 +29,7 @@ var upperLimit = tm[timeFrame] * timeMultiple;
 
 for (var i = 0; i < numDataPoints; i++){
 	var timeRnd = Math.floor(Math.random() * upperLimit);
-	var weightRnd = Math.floor(Math.random() * 100) + 100; //between 100 and 200
+	var weightRnd = Math.floor(Math.random() * 15) + 150; //between 150 and 165
 	
 	output.weight.push({time: currentTime - timeRnd, value: weightRnd});
 }
